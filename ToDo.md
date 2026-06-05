@@ -2,4 +2,5 @@
 - XD
 
 # Structure AI
--Algo
+- Algo
+- Stégie
