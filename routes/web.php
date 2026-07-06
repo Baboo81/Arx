@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
+/********************/
+/* Routes globales */
+/*******************/
+Route::get('/', [HomeController::class, 'index'])->name('home');
