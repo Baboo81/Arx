@@ -49,7 +49,7 @@
 
 <body>
     {{-- Nav --}}
-    @include('partials.navigation')
+    @include('partials.nav')
 
     {{-- Contenu principal --}}
     <main>
