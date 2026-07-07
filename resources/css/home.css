@@ -17,5 +17,21 @@ html, body
     min-width: 320px;
     font-family: "Lora", serif;
 }
-  
+ 
+/* Section : Home */
+.home
+{
+    min-height: 100vh;
+    display: flex;
+    position: relative;
+    background-image: url('../../public/assets/img/home/landing.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: var(--black);
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+/* Section : Home END */
   
