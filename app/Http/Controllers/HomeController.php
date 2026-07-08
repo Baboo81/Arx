@@ -12,12 +12,12 @@ class HomeController extends Controller
         /**
         * On récupère les datas depuis le fichier : App/Data/home.php 
         */
-        $home = require app_path("Data/home.php");
+        $home_data = require app_path("Data/home.php");
 
         /**
          * Onretourne la vue avec les datas 
          */
-        return view('home', compact('homeData'));
+        return view('home', compact('home_data'));
     }
     
 }
