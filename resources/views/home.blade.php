@@ -2,8 +2,8 @@
 
 @push('styles')
     @vite([
-        'resources/css/reset',
-        'resources/css/home',
+        'resources/css/reset.css',
+        'resources/css/home.css',
     ])    
 @endpush
 
