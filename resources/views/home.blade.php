@@ -9,17 +9,17 @@
 
 @section('title', 'ARX | Plate-forme SOC')
 
-@section('meta_description', 'Plate-forme de sécurisatiion du réseau domestique')
+@section('meta_description', 'Plate-forme de sécurisation du réseau domestique')
 
 @section('content')
 {{-- Section : Home --}}
 <section class="home">
-    <div class="container h-100">
-        <div class="row">
-            <div class="main-content">
-                
-            </div>
-        </div>
+    <div class="circuit-container">
+        @foreach($home_data['menu'] as $item)
+            <a href="{{ route($item['route']) }}" class="menu-item {{ $item['class'] }}">
+                {{ $item['name'] }}
+            </a>
+        @endforeach
     </div>
 </section>
 {{-- Section : Home END --}}
