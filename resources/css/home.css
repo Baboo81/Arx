@@ -33,5 +33,57 @@ html, body
     align-items: center;
     justify-content: center;
 }
+
+.circuit-container
+{
+    position: relative;
+    width: 700px;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-item
+{
+    position: absolute;
+    color: var(--orange);
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: all .3s ease;
+}
+
+.menu-item:hover
+{
+    color: var(--blue);
+}
+
+.soc
+{
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.server
+{
+    left: -170px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.vpn
+{
+    right: -150px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.ai
+{
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+}
 /* Section : Home END */
   
