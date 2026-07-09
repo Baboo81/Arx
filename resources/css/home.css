@@ -61,7 +61,7 @@ html, body
 .soc
 {
     top: -60px;
-    left: 50%;
+    left: 40%;
     transform: translateX(-50%);
 }
 
@@ -82,7 +82,7 @@ html, body
 .ai
 {
     bottom: -60px;
-    left: 50%;
+    left: 40%;
     transform: translateX(-50%);
 }
 /* Section : Home END */
