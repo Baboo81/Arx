@@ -1,6 +1,10 @@
 # réalisation de la maquette 
 - XD
 
-# Structure AI
-- Algo
-- Stégie
+# Architecture ARX
+- ARX Core
+    - ARX Server
+    - ARX AI
+    - ARX SOC
+    - ARX Cloud
+    - ARX VPN
