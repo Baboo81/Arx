@@ -9,3 +9,4 @@
     - ARX Cloud
     - ARX VPN
 # Étape n°1: création de la partie ARX Core
+- [V] Création de l'architecture 
