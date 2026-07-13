@@ -297,7 +297,7 @@ $table->unique(['module', 'key']);
 
 ---
 
-## 4. Exécuter la migration
+## 4. Exécuter la migration (Je suis arrivée à cette étape !!!!!!)
 
 ```bash
 php artisan migrate
