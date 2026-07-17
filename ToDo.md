@@ -337,6 +337,13 @@ $config->set('vpn.default_port', 51820);
 
 ---
 
+## 7. Rechercher des pictos (sever, SOC, VPN, AI)
+  - Freepik
+
+
+---
+
+
 ## Objectif global
 
 Construire progressivement **ARX Core** avant de développer les modules (VPN, SOC, AI, Server, Cloud).
