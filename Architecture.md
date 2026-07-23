@@ -37,7 +37,7 @@ Construire une infrastructure domestique fiable, évolutive et sécurisée pour 
 
 # Schéma de l'architecture
 
-```text
+
                      Internet
                          │
                     Modem / Box
