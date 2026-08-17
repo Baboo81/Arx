@@ -200,17 +200,6 @@ Utiliser uniquement :
 
 ---
 
-## 💨 Refroidissement
-
-Le Raspberry Pi 5 chauffe rapidement.
-
-Prévoir :
-
-- ventilateur
-- dissipateur
-- boîtier ventilé
-
----
 
 ## 💾 Sauvegarde
 
