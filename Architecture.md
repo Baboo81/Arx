@@ -286,6 +286,3 @@ ARX        Sauvegarde      IA avancée
 >
 > L'objectif est de faire évoluer progressivement ARX d'un serveur domestique vers une véritable plateforme personnelle de cybersécurité et de services auto-hébergés.
 
-# Explorer les nouveautés Laravel 13
-
-> Utilser : php artisan dev
