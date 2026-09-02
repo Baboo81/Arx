@@ -1,6 +1,8 @@
 <?php
 
 return [
+        'main_title' => "Bienvenue sur ARX Core",
+        'sub_title' => "Centraliser, Sécuriser, Superviser, Automatiser",
         'menu' => [
             [
             'name' => "ARX Server",
