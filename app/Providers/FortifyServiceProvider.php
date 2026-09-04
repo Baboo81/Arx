@@ -34,6 +34,25 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
         Fortify::redirectUserForTwoFactorAuthenticationUsing(RedirectIfTwoFactorAuthenticatable::class);
+        /*
+        |--------------------------------------------------------------------------
+        | Confirmation du mot de passe
+        |--------------------------------------------------------------------------
+        |
+        | Fortify exige une confirmation du mot de passe avant certaines
+        | opérations sensibles, notamment l'activation du 2FA.
+        |
+        | ARX conserve l'interface fournie par Breeze : nous indiquons donc
+        | à Fortify d'utiliser la vue Breeze existante.
+        |
+        */
+        Fortify::confirmPasswordView(function () {
+            return view('auth.confirm-password');
+        });
+
+        Fortify::twoFactorChallengeView(function () {
+            return view('auth.two-factor-challenge');
+        });
 
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());

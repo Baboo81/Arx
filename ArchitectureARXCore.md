@@ -458,3 +458,21 @@ C'est une **architecture de plateforme** capable d'évoluer dans le temps.
 > **Les modules ARX = les briques spécialisées.**
 >
 > **Les interfaces = les contrats qui permettent aux briques de coopérer.**
+
+## Sécurisation 
+
+Email + mot de passe
+        ↓
+Fortify authentifie l'utilisatrice
+        ↓
+Compte protégé par 2FA détecté
+        ↓
+/two-factor-challenge
+        ↓
+Code TOTP généré par l'iPhone
+        ↓
+Fortify valide le code
+        ↓
+Session authentifiée
+        ↓
+ARX HOME 🛡️
