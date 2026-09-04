@@ -31,7 +31,12 @@
 
             <!-- Page Content -->
             <main>
-                @yield('content')
+                <!-- Gestion des 2 méthodes de rendu $slot utilisé par les composants Blade comme Breeze -->
+                @isset($slot)
+                    {{ $slot }}
+                @else 
+                    @yield('content')
+                @endisset
             </main>
         </div>
     </body>
