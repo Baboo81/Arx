@@ -173,6 +173,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
             const button = document.getElementById('show-recovery-codes');
             const container = document.getElementById('recovery-codes');
 
@@ -181,7 +182,25 @@
             }
 
             button.addEventListener('click', async function() {
+
+                /*
+                 * Si les codes sont déjà visibles,
+                 * un second clic les masque.
+                 */
+                if (!container.classList.contains('hidden')) {
+                    container.classList.add('hidden');
+                    container.innerHTML = '';
+
+                    button.textContent = 'Afficher les codes';
+
+                    return;
+                }
+
                 try {
+
+                    /*
+                     * Demande les recovery codes à Fortify.
+                     */
                     const response = await fetch(
                         "{{ route('two-factor.recovery-codes') }}", {
                             headers: {
@@ -190,19 +209,49 @@
                         }
                     );
 
+                    /*
+                     * Le middleware password.confirm peut rediriger
+                     * vers la page de confirmation du mot de passe.
+                     *
+                     * fetch() suit automatiquement cette redirection.
+                     * On vérifie donc si la réponse finale correspond
+                     * à la route password.confirm.
+                     */
+                    if (response.redirected &&
+                        response.url.includes('/user/confirm-password')) {
+
+                        window.location.href =
+                            "{{ route('password.confirm') }}";
+
+                        return;
+                    }
+
                     if (!response.ok) {
-                        throw new Error('Impossible de récupérer les codes.');
+                        throw new Error(
+                            'Impossible de récupérer les codes.'
+                        );
                     }
 
                     const codes = await response.json();
 
+                    /*
+                     * Nettoyage du conteneur avant affichage.
+                     */
                     container.innerHTML = '';
 
                     const list = document.createElement('ul');
 
+                    /*
+                     * Chaque code est ajouté avec textContent.
+                     *
+                     * Le navigateur le traite donc comme du texte
+                     * et non comme du HTML.
+                     */
                     codes.forEach(function(code) {
                         const item = document.createElement('li');
+
                         item.textContent = code;
+
                         list.appendChild(item);
                     });
 
@@ -212,6 +261,7 @@
                     button.textContent = 'Masquer les codes';
 
                 } catch (error) {
+
                     container.innerHTML =
                         '<p>Impossible d’afficher les codes de récupération.</p>';
 
