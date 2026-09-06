@@ -9,11 +9,78 @@
    --white : #f5f5f5;
 }
 
-html, body
+h1
+{
+    color: var(--orange);
+    font-size: clamp(3rem, 5vh, 5rem);
+}
+
+p
+{
+    color: var(--blue);
+}
+
+.arx-ai-box 
 {
     width: 100%;
-    min-height: 500px;
-    min-width: 320px;
+    background-color: rgba(5, 5, 5, 0.92);
+    border: 1px solid rgba(0, 241, 242, 0.25);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow:
+        0 0 30px rgba(0, 241, 242, 0.08),
+        0 0 60px rgba(255, 107, 53, 0.05);
+}
+
+.arx-ai-visual 
+{
+    padding: 2rem;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 241, 242, 0.08),
+            transparent 65%
+        );
+}
+
+.arx-ai-image 
+{
+    max-height: 420px;
+    object-fit: contain;
+}
+
+.arx-ai-interface 
+{
+    padding: 2rem;
+    border-top: 1px solid rgba(0, 241, 242, 0.15);
+}
+
+.arx-ai-interface h2 
+{
+    color: var(--orange);
     font-family: "Lora", serif;
-    background-color: var(--black);
+}
+
+.arx-ai-chat 
+{
+    min-height: 180px;
+    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    color: var(--white);
+}
+
+.arx-ai-button 
+{
+    background-color: var(--orange);
+    color: var(--black);
+    font-weight: 600;
+    border: none;
+}
+
+.arx-ai-button:hover
+ {
+    background-color: var(--blue);
+    color: var(--black);
 }

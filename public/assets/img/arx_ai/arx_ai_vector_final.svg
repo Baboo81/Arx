@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1400 1100"
+     width="1400" height="1100"
+     role="img" aria-labelledby="title desc">
+
+  <title id="title">ARX AI</title>
+  <desc id="desc">Illustration vectorielle ARX AI : nuage abstrait bleu cyan orange, réseau géométrique, losanges et médaillon noir central.</desc>
+
+  <defs>
+    <!-- Palette ARX -->
+    <linearGradient id="backBlob" x1="170" y1="850" x2="1080" y2="130" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07145f"/>
+      <stop offset=".24" stop-color="#083f99"/>
+      <stop offset=".52" stop-color="#078fc5"/>
+      <stop offset=".73" stop-color="#10cfe6"/>
+      <stop offset=".88" stop-color="#36dbe9"/>
+      <stop offset="1" stop-color="#ff6b35"/>
+    </linearGradient>
+
+    <linearGradient id="middleBlob" x1="170" y1="800" x2="1060" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#06155f"/>
+      <stop offset=".34" stop-color="#0753aa"/>
+      <stop offset=".68" stop-color="#08b9dd"/>
+      <stop offset="1" stop-color="#ff6b35"/>
+    </linearGradient>
+
+    <linearGradient id="frontBlob" x1="220" y1="790" x2="980" y2="250" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0a2376"/>
+      <stop offset=".42" stop-color="#087fc0"/>
+      <stop offset=".78" stop-color="#13cfe6"/>
+      <stop offset="1" stop-color="#46e0eb"/>
+    </linearGradient>
+
+    <linearGradient id="orangeGlow" x1="470" y1="220" x2="1060" y2="390" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffb276" stop-opacity=".42"/>
+      <stop offset=".48" stop-color="#ff6b35" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#ff6b35" stop-opacity=".68"/>
+    </linearGradient>
+
+    <linearGradient id="badge" x1="485" y1="355" x2="880" y2="760" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#292929"/>
+      <stop offset=".46" stop-color="#171717"/>
+      <stop offset=".48" stop-color="#090909"/>
+      <stop offset="1" stop-color="#000000"/>
+    </linearGradient>
+
+    <radialGradient id="cyanGlow">
+      <stop offset="0" stop-color="#44f3fa" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#00dbe9" stop-opacity=".15"/>
+    </radialGradient>
+
+    <filter id="shadow" x="-30%" y="-50%" width="160%" height="200%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <!-- =========================================================
+       MASSES ORGANIQUES
+       ========================================================= -->
+
+  <path fill="url(#backBlob)" opacity=".92"
+        d="M79 581
+           C29 485 85 369 202 324
+           C274 296 283 210 389 191
+           C477 175 522 224 592 202
+           C690 172 726 67 840 74
+           C930 80 945 154 1017 184
+           C1116 226 1100 322 1143 393
+           C1183 460 1140 524 1178 591
+           C1224 673 1161 759 1070 787
+           C986 814 939 889 840 874
+           C754 861 697 914 607 878
+           C521 844 447 894 362 853
+           C268 808 232 722 161 679
+           C113 649 99 621 79 581Z"/>
+
+  <path fill="url(#middleBlob)" opacity=".90"
+        d="M118 578
+           C74 494 125 400 223 361
+           C298 331 316 257 405 240
+           C481 225 528 266 596 246
+           C675 223 726 138 814 144
+           C894 149 922 211 990 239
+           C1074 273 1061 354 1099 415
+           C1134 472 1098 531 1127 590
+           C1163 662 1105 727 1029 752
+           C952 777 911 837 829 824
+           C748 811 696 856 616 827
+           C538 798 474 840 397 804
+           C319 767 284 697 220 658
+           C167 625 137 613 118 578Z"/>
+
+  <path fill="url(#frontBlob)" opacity=".72"
+        d="M171 566
+           C136 499 175 424 256 391
+           C320 365 345 304 418 290
+           C485 277 532 311 594 292
+           C661 272 714 208 786 214
+           C853 220 890 263 950 288
+           C1017 316 1015 380 1045 431
+           C1074 480 1046 531 1069 580
+           C1098 640 1050 691 986 711
+           C921 731 885 782 815 771
+           C745 760 698 798 629 773
+           C560 748 506 782 441 752
+           C373 721 341 662 287 631
+           C236 602 190 602 171 566Z"/>
+
+  <!-- Bande orange caractéristique -->
+  <path fill="url(#orangeGlow)"
+        d="M374 208
+           C474 180 519 229 591 205
+           C688 173 726 73 835 79
+           C918 84 943 153 1012 183
+           C1071 209 1092 252 1095 303
+           C1028 246 961 220 888 216
+           C798 211 733 252 656 263
+           C559 276 491 225 374 208Z"/>
+
+  <!-- =========================================================
+       LOSANGES / DONNÉES
+       ========================================================= -->
+  <g fill="#13e8f2">
+    <rect x="410" y="317" width="35" height="35" transform="rotate(45 427.5 334.5)"/>
+    <rect x="459" y="355" width="32" height="32" transform="rotate(45 475 371)"/>
+    <rect x="379" y="374" width="34" height="34" transform="rotate(45 396 391)"/>
+    <rect x="440" y="410" width="30" height="30" transform="rotate(45 455 425)"/>
+
+    <rect x="877" y="472" width="36" height="36" transform="rotate(45 895 490)"/>
+    <rect x="936" y="510" width="31" height="31" transform="rotate(45 951.5 525.5)"/>
+    <rect x="857" y="550" width="31" height="31" transform="rotate(45 872.5 565.5)"/>
+    <rect x="984" y="571" width="36" height="36" transform="rotate(45 1002 589)"/>
+    <rect x="918" y="627" width="34" height="34" transform="rotate(45 935 644)"/>
+  </g>
+
+  <g fill="url(#cyanGlow)" opacity=".65">
+    <circle cx="428" cy="335" r="48"/>
+    <circle cx="935" cy="548" r="55"/>
+  </g>
+
+  <!-- =========================================================
+       RÉSEAU GÉOMÉTRIQUE
+       ========================================================= -->
+  <g fill="none"
+     stroke="#101418"
+     stroke-width="3"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     opacity=".94">
+
+    <path d="M62 548 L286 93 L467 108 L799 239 L1058 299 L1180 594 L1064 799 L783 958 L314 941 L62 548"/>
+    <path d="M62 548 L362 526 L467 108"/>
+    <path d="M286 93 L362 526 L314 941"/>
+    <path d="M467 108 L799 239 L362 526"/>
+    <path d="M467 108 L1058 299"/>
+    <path d="M362 526 L799 239 L1180 594"/>
+    <path d="M362 526 L1064 799"/>
+    <path d="M799 239 L783 958"/>
+    <path d="M799 239 L1064 799"/>
+    <path d="M1058 299 L1064 799"/>
+    <path d="M1180 594 L783 958"/>
+    <path d="M1064 799 L314 941"/>
+    <path d="M314 941 L783 958"/>
+  </g>
+
+  <g fill="#101418">
+    <circle cx="62" cy="548" r="10"/>
+    <circle cx="286" cy="93" r="10"/>
+    <circle cx="467" cy="108" r="10"/>
+    <circle cx="362" cy="526" r="11"/>
+    <circle cx="799" cy="239" r="11"/>
+    <circle cx="1058" cy="299" r="11"/>
+    <circle cx="1180" cy="594" r="11"/>
+    <circle cx="1064" cy="799" r="11"/>
+    <circle cx="783" cy="958" r="11"/>
+    <circle cx="314" cy="941" r="10"/>
+  </g>
+
+  <!-- =========================================================
+       ÉCLABOUSSURES NOIRES
+       ========================================================= -->
+  <g fill="#030303">
+    <path d="M505 540
+             C456 520 431 531 448 549
+             C466 567 487 555 508 565
+             C469 575 452 594 474 604
+             C500 616 523 590 544 588Z"/>
+    <path d="M516 604
+             C470 628 456 661 484 650
+             C508 640 526 620 552 617Z"/>
+    <path d="M535 651
+             C502 686 497 719 519 701
+             C536 688 548 668 567 654Z"/>
+    <circle cx="443" cy="639" r="8"/>
+    <circle cx="410" cy="679" r="10"/>
+    <circle cx="477" cy="723" r="7"/>
+    <circle cx="532" cy="751" r="8"/>
+    <circle cx="586" cy="779" r="6"/>
+    <circle cx="895" cy="617" r="8"/>
+  </g>
+
+  <!-- Ombre -->
+  <ellipse cx="686" cy="995" rx="280" ry="24"
+           fill="#000" opacity=".16" filter="url(#shadow)"/>
+
+  <!-- =========================================================
+       MÉDAILLON ARX AI
+       ========================================================= -->
+  <circle cx="690" cy="555" r="207" fill="url(#badge)"/>
+
+  <!-- reflet -->
+  <path d="M544 409
+           A207 207 0 0 1 836 409
+           L544 701
+           A207 207 0 0 1 544 409Z"
+        fill="#fff" opacity=".055"/>
+
+  <text x="690" y="585"
+        text-anchor="middle"
+        fill="#ff6b35"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="105"
+        font-weight="500"
+        letter-spacing="2">ARX AI</text>
+
+</svg>
