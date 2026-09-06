@@ -35,170 +35,190 @@
     <div class="mt-6">
 
         {{--
-            ============================================================
-            ÉTAPE 1 : DEMANDE D'ACTIVATION DU 2FA
-            ============================================================
+        ============================================================
+        ÉTAT 1 : LE 2FA N'EST PAS ENCORE ACTIVÉ
+        ============================================================
+    --}}
+        @if (!auth()->user()->two_factor_secret)
+            <form method="POST" action="{{ route('two-factor.enable') }}">
+                @csrf
 
-            Le formulaire envoie une requête POST vers la route Fortify :
-
-                POST /user/two-factor-authentication
-
-            La route "two-factor.enable" est fournie directement
-            par Laravel Fortify.
-
-            Fortify se charge ensuite de générer :
-            - le secret 2FA ;
-            - les codes de récupération.
-
-            Comme confirmPassword est activé dans config/fortify.php,
-            Fortify peut demander une confirmation du mot de passe
-            avant d'autoriser cette opération sensible.
-        --}}
-
-        <form method="POST" action="{{ route('two-factor.enable') }}">
-
-            {{-- Protection CSRF obligatoire pour une requête POST Laravel --}}
-            @csrf
-
-            <x-primary-button>
-                {{ __('Activer le 2FA') }}
-            </x-primary-button>
-
-        </form>
+                <x-primary-button>
+                    {{ __('Activer le 2FA') }}
+                </x-primary-button>
+            </form>
 
 
-        {{--
-            ============================================================
-            ÉTAPES 2 ET 3 : CONFIGURATION ET CONFIRMATION DU 2FA
-            ============================================================
+            {{--
+        ============================================================
+        ÉTAT 2 : LE 2FA EST EN COURS DE CONFIGURATION
+        ============================================================
 
-            Cette partie n'est affichée que si :
-
-            1. Un secret 2FA existe déjà pour l'utilisateur.
-            2. Le 2FA n'a pas encore été confirmé.
-
-            two_factor_secret présent :
-                Fortify a préparé le 2FA.
-
-            two_factor_confirmed_at = null :
-                l'utilisateur n'a pas encore validé un code TOTP.
-
-            Tant que ces deux conditions sont réunies, ARX affiche
-            le QR code ainsi que le formulaire de confirmation.
-        --}}
-
-        @if (
-            auth()->user()->two_factor_secret &&
-            is_null(auth()->user()->two_factor_confirmed_at)
-        )
-
-            <div class="mt-6">
-
+        Le secret existe, mais aucun code TOTP n'a encore été
+        confirmé.
+    --}}
+        @elseif (is_null(auth()->user()->two_factor_confirmed_at))
+            <div>
                 <h3 class="text-md font-medium text-gray-900 dark:text-gray-100">
                     {{ __('Scannez ce QR code avec votre application d’authentification') }}
                 </h3>
-
-
-                {{--
-                    Génération du QR code par Fortify.
-
-                    twoFactorQrCodeSvg() retourne directement le code SVG
-                    représentant le QR code.
-
-                    Les {!! !!} sont utilisées volontairement ici afin
-                    que Blade interprète le SVG comme du HTML au lieu
-                    de l'échapper comme du simple texte.
-                --}}
 
                 <div class="mt-4">
                     {!! auth()->user()->twoFactorQrCodeSvg() !!}
                 </div>
 
-
                 <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">
                     {{ __('Saisissez ensuite le code à 6 chiffres généré par votre application.') }}
                 </p>
 
-
-                {{--
-                    ====================================================
-                    ÉTAPE 4 : CONFIRMATION DU CODE TOTP
-                    ====================================================
-
-                    L'utilisateur saisit le code généré par son
-                    application d'authentification.
-
-                    Le formulaire envoie ce code à la route Fortify :
-
-                        POST /user/confirmed-two-factor-authentication
-
-                    Fortify vérifie alors que le code correspond bien
-                    au secret 2FA associé au compte.
-                --}}
-
-                <form
-                    method="POST"
-                    action="{{ route('two-factor.confirm') }}"
-                    class="mt-4"
-                >
-
+                <form method="POST" action="{{ route('two-factor.confirm') }}" class="mt-4">
                     @csrf
 
                     <div>
+                        <x-input-label for="code" :value="__('Code de vérification')" />
 
-                        <x-input-label
-                            for="code"
-                            :value="__('Code de vérification')"
-                        />
+                        <x-text-input id="code" name="code" type="text" inputmode="numeric"
+                            autocomplete="one-time-code" class="mt-1 block w-full" required autofocus />
 
-                        {{--
-                            inputmode="numeric"
-                                indique notamment aux appareils mobiles
-                                qu'un clavier numérique est préférable.
-
-                            autocomplete="one-time-code"
-                                indique au navigateur qu'il s'agit d'un
-                                code d'authentification temporaire.
-                        --}}
-
-                        <x-text-input
-                            id="code"
-                            name="code"
-                            type="text"
-                            inputmode="numeric"
-                            autocomplete="one-time-code"
-                            class="mt-1 block w-full"
-                            required
-                            autofocus
-                        />
-
-                        {{--
-                            Affiche le message de validation retourné
-                            par Fortify si le code saisi est incorrect.
-                        --}}
-
-                        <x-input-error
-                            :messages="$errors->get('code')"
-                            class="mt-2"
-                        />
-
+                        <x-input-error :messages="$errors->get('code')" class="mt-2" />
                     </div>
 
-
                     <div class="mt-4">
-
                         <x-primary-button>
                             {{ __('Confirmer le 2FA') }}
                         </x-primary-button>
-
                     </div>
-
                 </form>
-
             </div>
 
+
+            {{--
+        ============================================================
+        ÉTAT 3 : LE 2FA EST ACTIVÉ ET CONFIRMÉ
+        ============================================================
+    --}}
+        @else
+            <div>
+                <p class="text-sm text-green-600 dark:text-green-400">
+                    {{ __('L’authentification à deux facteurs est activée sur votre compte.') }}
+                </p>
+
+                {{-- ================================================
+             CODES DE RÉCUPÉRATION
+             ================================================ --}}
+
+                <div class="mt-6">
+                    <h3 class="text-md font-medium text-gray-900 dark:text-gray-100">
+                        {{ __('Codes de récupération') }}
+                    </h3>
+
+                    <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                        {{ __('Ces codes permettent d’accéder à votre compte si vous perdez l’accès à votre application d’authentification.') }}
+                    </p>
+
+                    <button type="button" id="show-recovery-codes"
+                        class="mt-4 inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-gray-800 dark:text-gray-200 uppercase tracking-widest hover:bg-gray-300 dark:hover:bg-gray-600">
+                        {{ __('Afficher les codes') }}
+                    </button>
+
+                    <div id="recovery-codes" class="mt-4 hidden text-sm text-gray-800 dark:text-gray-200">
+                        <p>
+                            {{ __('Chargement des codes...') }}
+                        </p>
+                    </div>
+
+                    <form method="POST" action="{{ route('two-factor.regenerate-recovery-codes') }}" class="mt-4">
+                        @csrf
+
+                        <x-secondary-button type="submit">
+                            {{ __('Régénérer les codes') }}
+                        </x-secondary-button>
+                    </form>
+                </div>
+
+                {{-- ================================================
+             DÉSACTIVATION DU 2FA
+             ================================================ --}}
+
+                <form method="POST" action="{{ route('two-factor.disable') }}" class="mt-6">
+                    @csrf
+                    @method('DELETE')
+
+                    <x-danger-button>
+                        {{ __('Désactiver le 2FA') }}
+                    </x-danger-button>
+                </form>
+            </div>
         @endif
 
     </div>
+
+    {{--
+    ============================================================
+    AFFICHAGE DES CODES DE RÉCUPÉRATION
+    ============================================================
+
+    Ce script permet d'afficher les codes de récupération 2FA
+    uniquement lorsque l'utilisateur clique sur le bouton prévu.
+
+    Une requête HTTP est envoyée à la route Fortify
+    "two-factor.recovery-codes" via fetch().
+
+    Fortify retourne les codes au format JSON, puis JavaScript
+    les insère dans la page sans nécessiter son rechargement.
+
+    Les codes sont ajoutés avec textContent afin qu'ils soient
+    interprétés uniquement comme du texte et non comme du HTML.
+--}}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.getElementById('show-recovery-codes');
+            const container = document.getElementById('recovery-codes');
+
+            if (!button || !container) {
+                return;
+            }
+
+            button.addEventListener('click', async function() {
+                try {
+                    const response = await fetch(
+                        "{{ route('two-factor.recovery-codes') }}", {
+                            headers: {
+                                'Accept': 'application/json',
+                            }
+                        }
+                    );
+
+                    if (!response.ok) {
+                        throw new Error('Impossible de récupérer les codes.');
+                    }
+
+                    const codes = await response.json();
+
+                    container.innerHTML = '';
+
+                    const list = document.createElement('ul');
+
+                    codes.forEach(function(code) {
+                        const item = document.createElement('li');
+                        item.textContent = code;
+                        list.appendChild(item);
+                    });
+
+                    container.appendChild(list);
+                    container.classList.remove('hidden');
+
+                    button.textContent = 'Masquer les codes';
+
+                } catch (error) {
+                    container.innerHTML =
+                        '<p>Impossible d’afficher les codes de récupération.</p>';
+
+                    container.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
 
 </section>
