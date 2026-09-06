@@ -244,19 +244,30 @@ Docker
 
 # Évolution future
 
-```text
-Internet
-    │
-Firewall
-    │
-Switch 2.5 Gb
-    │
-──────────────────────────────────
-│               │                │
-Pi 5          NAS          Mini PC IA
-│               │                │
-ARX        Sauvegarde      IA avancée
-```
+                         SWITCH
+                    ┌──────┴──────┐
+                    │             │
+                  iMac          ARX Pi 5
+                    │             │
+              USB-C HUB           ├── NVMe système
+              ┌───┼───┐          │
+             HDD HDD HDD          └── Stockage ARX
+                                      │
+                                  RAID 1
+                                ┌─────┴─────┐
+                              HDD A       HDD B
+# Matériel (switch)
+
+                  NETGEAR GS308EP
+                        │
+       ┌────────────────┼────────────────┐
+       │                │                │
+    VLAN 10          VLAN 20          VLAN 30
+     HOME              DEV              ARX
+       │                │                │
+   appareils          iMac         Raspberry Pi
+                                      │
+                                 ARX Core/SOC
 
 ---
 
