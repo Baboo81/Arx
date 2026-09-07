@@ -1,6 +1,7 @@
 @import './reset.css';
 @import './navigation.css';
 @import './components/btn.css';
+@import './components/arx-input.css';
 
 
 @tailwind base;

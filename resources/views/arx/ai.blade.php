@@ -39,13 +39,19 @@
                             <form>
 
                                 <div class="input-group">
-
-                                    <input type="text" class="form-control" placeholder="Posez une question à ARX AI...">
-
-                                   <x-arx-button href="{{ route('arx.ai') }}">
-                                        ARX AI
-                                   </x-arx-button>
-
+                                    <div class="my-3">
+                                         <x-arx-input 
+                                            type="text"
+                                            name="search"
+                                            placeholder="Rechercher"
+                                        />
+                                    </div>
+                                   
+                                    <div class="my-3">
+                                         <x-arx-button href="{{ route('arx.ai') }}">
+                                            ARX AI
+                                        </x-arx-button>
+                                    </div>
                                 </div>
 
                             </form>
