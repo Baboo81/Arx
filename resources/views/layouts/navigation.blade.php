@@ -7,7 +7,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <img src="{{ asset('assets/img/logo/arx_logo.svg') }}" alt="Logo représentant un circuit imprimé" class="arx-logo">
+                        <img src="{{ asset('assets/img/logo/arx_logo.svg') }}" alt="Logo représentant un circuit imprimé" class="arx-logo p-3">
                     </a>
                 </div>
 

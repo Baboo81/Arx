@@ -42,9 +42,9 @@
 
                                     <input type="text" class="form-control" placeholder="Posez une question à ARX AI...">
 
-                                    <button class="btn arx-ai-button" type="submit">
-                                        Envoyer
-                                    </button>
+                                   <x-arx-button href="{{ route('arx.ai') }}">
+                                        ARX AI
+                                   </x-arx-button>
 
                                 </div>
 
