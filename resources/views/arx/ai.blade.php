@@ -9,58 +9,70 @@
 @section('meta_description', 'ARX AI')
 
 @section('content')
+
     {{-- Section : Banner --}}
-    <header class="text-center">
+    <header class="text-center py-8">
         <h1>
             {{ $ai_data['main_title'] }}
         </h1>
     </header>
+
     <section class="arxAi-content">
-        <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-10 col-xl-8">
-                    <div class="arx-ai-box">
-                        <!-- Visuel ARX AI -->
-                        <div class="arx-ai-visual text-center">
-                            <img src="{{ asset('assets/img/arx_ai/arx_ai.svg') }}" alt="ARX AI"
-                                class="img-fluid arx-ai-image">
-                        </div>
-                        <!-- Interaction avec ARX AI -->
-                        <div class="arx-ai-interface">
-                            <h2 class="text-center mb-4">
-                                Interaction avec ARX AI
-                            </h2>
 
-                            <div class="arx-ai-chat mb-4">
-                                <p>
-                                    ARX AI est prêt
-                                </p>
-                            </div>
-                            <form>
+        <div class="max-w-5xl mx-auto px-4 py-12">
 
-                                <div class="input-group">
-                                    <div class="my-3">
-                                         <x-arx-input 
-                                            type="text"
-                                            name="search"
-                                            placeholder="Rechercher"
-                                        />
-                                    </div>
-                                   
-                                    <div class="my-3">
-                                         <x-arx-button href="{{ route('arx.ai') }}">
-                                            ARX AI
-                                        </x-arx-button>
-                                    </div>
-                                </div>
+            <div class="arx-ai-box">
 
-                            </form>
+                {{-- Visuel ARX AI --}}
+                <div class="arx-ai-visual text-center">
 
-                        </div>
-                    </div>
+                    <img src="{{ asset('assets/img/arx_ai/arx_ai.svg') }}" alt="ARX AI" class="arx-ai-image mx-auto">
+
                 </div>
+
+                {{-- Interaction avec ARX AI --}}
+                <div class="arx-ai-interface">
+
+                    <h2 class="text-center mb-6">
+                        Interaction avec ARX AI
+                    </h2>
+
+                    <div class="arx-ai-chat mb-6">
+                        <p>
+                            ARX AI est prêt
+                        </p>
+                    </div>
+
+                    <form>
+
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+
+                            <div class="flex-1">
+
+                                <x-arx-input type="text" name="search" placeholder="Rechercher" />
+
+                            </div>
+
+                            <div class="shrink-0">
+
+                                <x-arx-button href="{{ route('arx.ai') }}">
+                                    ARX AI
+                                </x-arx-button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
             </div>
+
         </div>
+
     </section>
+
     {{-- Section : Banner END --}}
+
 @endsection
