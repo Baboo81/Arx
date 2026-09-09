@@ -39,7 +39,7 @@
 
                     <div class="arx-ai-chat mb-6">
                         <p>
-                            ARX AI est prêt
+                           {{ $ai_data['arx_ai_chat'] }}
                         </p>
                     </div>
 
