@@ -34,7 +34,7 @@
                 <div class="arx-ai-interface">
 
                     <h2 class="text-center mb-6">
-                        Interaction avec ARX AI
+                       {{ $ai_data['arx_ai_interaction'] }}
                     </h2>
 
                     <div class="arx-ai-chat mb-6">
