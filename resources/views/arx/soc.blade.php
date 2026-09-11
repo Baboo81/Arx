@@ -13,7 +13,7 @@
  {{-- Section : Banner --}}
     <header class="text-center py-8">
         <h1>
-            {{ $ai_data['main_title'] }}
+            {{ $soc_data['main_title'] }}
         </h1>
     </header>
 
@@ -26,7 +26,7 @@
                 {{-- Visuel ARX AI --}}
                 <div class="arx-ai-visual text-center">
 
-                    <img src="{{ asset('assets/img/arx_ai/arx_ai.svg') }}" alt="ARX AI" class="arx-ai-image mx-auto">
+                    <img src="{{ asset('assets/img/arx_soc/arx_soc.svg') }}" alt="ARX SOC" class="arx-ai-image mx-auto">
 
                 </div>
 
@@ -34,13 +34,12 @@
                 <div class="arx-ai-interface">
 
                     <h2 class="text-center mb-6">
-                       {{ $ai_data['arx_ai_interaction'] }}
+                       
                     </h2>
 
                     <div class="arx-ai-chat mb-6">
                         <p>
-                           {{ $ai_data['arx_ai_chat'] }}
-                        </p>
+                           
                     </div>
 
                     <form>

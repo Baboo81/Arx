@@ -9,6 +9,13 @@ class ArxSocController extends Controller
 {
     public function show(): View
     {
-        return view('arx.soc');
+        /**
+         * Récupération des datas depuis /App/Data/soc.php
+         */
+        $soc_data = require app_path("Data/soc.php");
+        /**
+         * Récupération de la vue et des datas
+         */
+        return view('arx.soc', compact('soc_data'));
     }
 }
