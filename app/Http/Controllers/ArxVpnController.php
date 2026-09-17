@@ -9,6 +9,14 @@ class ArxVpnController extends Controller
 {
     public function show(): View
     {
-        return view('arx.vpn');
+        /**
+         * Récupération des datas dans le fichier  : App/Data/vpn.php
+         */
+        $vpn_data = require app_path("Data/vpn.php");
+
+        /**
+         * Récupération de la vue avec les datas 
+         */
+        return view('arx.vpn', compact('vpn_data'));
     }
 }
