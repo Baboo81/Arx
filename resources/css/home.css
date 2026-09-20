@@ -18,6 +18,11 @@ html, body
     background-color: var(--black);
 }
 
+header
+{
+    background-color: var(--black);
+}
+
 h1
 {
     color: var(--orange);

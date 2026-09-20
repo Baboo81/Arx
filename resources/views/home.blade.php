@@ -11,7 +11,7 @@
 @section('content')
     {{-- Section : Home --}}
     <header class="d-flex flex-column align-items-center justify-content-center text-center my-5">
-        <h1 class="mb-0">
+        <h1 class=""">
             {{ $home_data['main_title'] }}
         </h1>
         <h2 class="my-4">
