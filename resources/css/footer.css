@@ -5,12 +5,12 @@
    --black : #050505;
    --orange : #ff6b35;
    --blue : #00f1f2;
-   --grey : #2e2e2e;
+   --grey : #1f2937;
    --white : #f5f5f5;
 }
 
-nav
+footer
 {
-    height: 300px;
+    height: 100px;
     background-color: var(--grey);
 }
