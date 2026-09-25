@@ -43,19 +43,24 @@
                         </p>
                     </div>
 
-                    <form>
+                    <form method="POST" action="{{ route ('arx.ai.ask') }}">
+                        @csrf
 
                         <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
 
                             <div class="flex-1">
 
-                                <x-arx-input type="text" name="search" placeholder="Rechercher" />
+                                <x-arx-input 
+                                    type="text" 
+                                    name="prompt" 
+                                    placeholder="Interroger ARX AI" 
+                                />
 
                             </div>
 
                             <div class="shrink-0">
 
-                                <x-arx-button href="{{ route('arx.ai') }}">
+                                <x-arx-button type="submit">
                                     ARX AI
                                 </x-arx-button>
 

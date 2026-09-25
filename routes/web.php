@@ -50,6 +50,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/arx/ai', [ArxAiController::class, 'show'])
         ->name('arx.ai');
+    Route::post('/arx/ai', [ArxAiController::class, 'ask'])
+        ->name('arx.ai.ask');
 
     Route::get('/arx/server', [ArxServerController::class, 'show'])
         ->name('arx.server');
