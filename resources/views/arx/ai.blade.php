@@ -34,33 +34,32 @@
                 <div class="arx-ai-interface">
 
                     <h2 class="text-center mb-6">
-                       {{ $ai_data['arx_ai_interaction'] }}
+                        {{ $ai_data['arx_ai_interaction'] }}
                     </h2>
 
                     <div class="arx-ai-chat mb-6">
                         <p>
-                           {{ $ai_data['arx_ai_chat'] }}
+                            {{ $ai_data['arx_ai_chat'] }}
                         </p>
                     </div>
 
-                    <form method="POST" action="{{ route ('arx.ai.ask') }}">
+                    <form method="POST" action="{{ route('arx.ai.ask') }}">
                         @csrf
 
                         <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
 
                             <div class="flex-1">
 
-                                <x-arx-input 
-                                    type="text" 
-                                    name="prompt" 
-                                    placeholder="Interroger ARX AI" 
-                                />
+                                <x-arx-input type="text" name="prompt" placeholder="Interroger ARX AI" />
 
-                                @error('prompt')
-                                    <p class="arx-ai-error">
-                                        {{ $message }}
-                                    </p>                                    
-                                @enderror
+                                <div class="my-3">
+                                    @error('prompt')
+                                        <p class="arx-ai-error">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+
+                                </div>
 
                             </div>
 
