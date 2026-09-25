@@ -1,6 +1,6 @@
-<footer class="">
-    <div class="row text-center">
-        <div class="col-12 col-sm-6 col-md-4">
+<footer class="p-2">
+    <div class="row align-items-center">
+        <div class="col-4">
             <section class="">
                 <a href="{{ route('home') }}">
                     <img src="{{ asset('assets/img/logo/arx_logo.svg') }}" alt="Logo représentant un circuit imprimé"
@@ -8,11 +8,9 @@
                 </a>
             </section>
         </div>
-    </div>
-    <div class="row text-center">
-        <div class="col-12 col-sm-6 col-md-4">
+        <div class="col-4 d-flex justify-content-center align-items-center">
             <section class="">
-                <p>
+                <p class="p-footer">
                     Designed by : Kenko-Web
                 </p>
             </section>
