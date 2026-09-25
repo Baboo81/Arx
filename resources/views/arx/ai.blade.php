@@ -56,6 +56,12 @@
                                     placeholder="Interroger ARX AI" 
                                 />
 
+                                @error('prompt')
+                                    <p class="arx-ai-error">
+                                        {{ $message }}
+                                    </p>                                    
+                                @enderror
+
                             </div>
 
                             <div class="shrink-0">

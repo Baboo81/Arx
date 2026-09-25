@@ -19,4 +19,16 @@ class ArxAiController extends Controller
          */
         return view('arx.ai', compact('ai_data'));
     }
+
+    public function ask(Request $request)
+    {
+        $validated = $request->validate([
+            'prompt' => [
+                'required',
+                'string',
+                'max:2000',
+            ],
+        ]);
+
+    }
 }
