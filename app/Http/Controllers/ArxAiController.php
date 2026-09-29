@@ -34,6 +34,18 @@ class ArxAiController extends Controller
             ],
         ]);
 
+        /**
+         * Extraction du prompt
+         */
         $prompt = $validated['prompt'];
+        /**
+         * Réponse ARX AI
+         */
+        $response = "ARX AI a bien reçu ta demande ! : {$prompt}";
+
+        $ai_data = require app_path("Data/ai.php");
+
+        return view('arx.ai', compact('ai_data', 'prompt', 'response'));
     }
 }
+

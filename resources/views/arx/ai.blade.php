@@ -41,6 +41,12 @@
                         <p>
                             {{ $ai_data['arx_ai_chat'] }}
                         </p>
+
+                        @if (isset($response))
+                            <p>
+                                {{ $response }}
+                            </p>
+                        @endif
                     </div>
 
                     <form method="POST" action="{{ route('arx.ai.ask') }}">
