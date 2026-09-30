@@ -12,10 +12,15 @@ namespace App\Services;
 Class ArxAiService
 {
     /**
-     * Création d'une méthode publique nommée ask, qui reçoit un $prompt obligatoirement sous forme de string, et qui promet de retourner une string
+     * Reçoit un prompt sous forme de string et retourne une réponse ARX AI structurée sous forme de tableau.
      */
-    public function ask(string $prompt): string
+    public function ask(string $prompt): array
     {
-        return "ARX AI a bien reçu la demande ! : {$prompt}";
+        return [
+            'status' => 'success',
+            'module' => 'arx-ai',
+            'prompt' =>  $prompt,
+            'message' => "ARX AI a bien reçu la demande ! : {$prompt}",
+        ];
     }
 }
