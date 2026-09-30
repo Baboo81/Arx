@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\ArxAiService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -20,7 +21,7 @@ class ArxAiController extends Controller
         return view('arx.ai', compact('ai_data'));
     }
 
-    public function ask(Request $request)
+    public function ask(Request $request, ArxAiService $arxAiService)
     {
         /**
          * $request est l'objet Laravel qui représente la requête reçue du navigateur.
@@ -38,10 +39,11 @@ class ArxAiController extends Controller
          * Extraction du prompt
          */
         $prompt = $validated['prompt'];
+
         /**
-         * Réponse ARX AI
+         * Demande au service ARX AI de traiter $prompt, puis on place ce qu'il me retourne dans $response
          */
-        $response = "ARX AI a bien reçu ta demande ! : {$prompt}";
+        $response = $arxAiService->ask($prompt);
 
         $ai_data = require app_path("Data/ai.php");
 
