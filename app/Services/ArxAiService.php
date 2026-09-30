@@ -16,6 +16,16 @@ Class ArxAiService
      */
     public function ask(string $prompt): array
     {
+        $requestData = [
+            'request' => [
+                'type' => 'conversation',
+                'prompt' => $prompt,
+            ],
+            'context' => [
+                'source' => 'arx-core',
+            ],
+        ];
+
         return [
             'status' => 'success',
             'module' => 'arx-ai',
