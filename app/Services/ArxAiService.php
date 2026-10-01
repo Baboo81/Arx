@@ -5,6 +5,7 @@
  */
 namespace App\Services;
 
+use Illuminate\Support\Facades\Http;
 
 /**
  * La classe ArxAiService sera le point de communication entre Laravel | ARX Core | ARX AI
@@ -26,11 +27,11 @@ Class ArxAiService
             ],
         ];
  
-        return [
-            'status' => 'success',
-            'module' => 'arx-ai',
-            'prompt' =>  $prompt,
-            'message' => "ARX AI a bien reçu la demande ! : {$prompt}",
-        ];
+       $response = Http::post('http://127.0.0.1:8001/ask', [
+            'prompt' => $prompt,
+       ]);
+        
+       return $response->json();
+       
     }
 }

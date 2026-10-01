@@ -44,7 +44,7 @@
 
                         @if (isset($response))
                             <p>
-                                {{ $response['message'] }}
+                                {{ $response['response'] }}
                             </p>
                         @endif
                     </div>
