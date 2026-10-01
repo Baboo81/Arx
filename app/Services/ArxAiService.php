@@ -25,7 +25,7 @@ Class ArxAiService
                 'source' => 'arx-core',
             ],
         ];
-
+ 
         return [
             'status' => 'success',
             'module' => 'arx-ai',
