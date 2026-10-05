@@ -1,26 +1,10 @@
 #Importation de la classe FastAPI de la bibliothèquue
 from fastapi import FastAPI
-#pydantic = bibliothèque Python (contrôleur des données) servant principalement à définir, valider, structurer des données
-from pydantic import BaseModel
+# Importation des modèles de données de la route /ask
+from models.ask import AskRequest ,AskResponse
+#Importation du service : ARX AI
 from services.arx_ai_service import process_prompt
 
-class RequestContext(BaseModel):
-    source: str
-
-#Une requête : AksRequest doit contenir un champ prompt et ce champ doit être une string
-class AskRequest(BaseModel):
-    type: str
-    prompt: str
-    context:RequestContext
-    
-
-#Caracteristiques de la réponse ARX AI 
-class AskResponse(BaseModel):
-    status: str
-    module: str
-    prompt: str
-    response: str
-    
 
 #Création de l'app FastAPI 
 app = FastAPI()
