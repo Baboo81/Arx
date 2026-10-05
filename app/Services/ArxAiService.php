@@ -18,18 +18,17 @@ Class ArxAiService
     public function ask(string $prompt): array
     {
         $requestData = [
-            'request' => [
-                'type' => 'conversation',
-                'prompt' => $prompt,
-            ],
-            'context' => [
+           'type' => 'conversation',
+           'prompt' => $prompt,
+           'context' => [
                 'source' => 'arx-core',
-            ],
+           ], 
         ];
  
-       $response = Http::post('http://127.0.0.1:8001/ask', [
-            'prompt' => $prompt,
-       ]);
+       $response = Http::post(
+            'http://127.0.0.1:8001/ask',
+            $requestData
+       );
         
        return $response->json();
        
