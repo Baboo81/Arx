@@ -4,9 +4,15 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from services.arx_ai_service import process_prompt
 
+class RequestContext(BaseModel):
+    source: str
+
 #Une requête : AksRequest doit contenir un champ prompt et ce champ doit être une string
 class AskRequest(BaseModel):
+    type: str
     prompt: str
+    context:RequestContext
+    
 
 #Caracteristiques de la réponse ARX AI 
 class AskResponse(BaseModel):
@@ -14,6 +20,7 @@ class AskResponse(BaseModel):
     module: str
     prompt: str
     response: str
+    
 
 #Création de l'app FastAPI 
 app = FastAPI()
