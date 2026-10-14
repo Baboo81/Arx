@@ -292,7 +292,7 @@ Docker
 # Philosophie d'ARX
 
 > **Un système modulaire, sécurisé et évolutif.**
->
+
 > Chaque composant est indépendant grâce à Docker afin de faciliter les mises à jour, la maintenance et les évolutions futures.
 
 > L'objectif est de faire évoluer progressivement ARX d'un serveur domestique vers une véritable plateforme personnelle de cybersécurité et de services auto-hébergés.
