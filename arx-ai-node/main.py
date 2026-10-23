@@ -1,7 +1,10 @@
 #Importation de la classe FastAPI de la bibliothèquue
 from fastapi import FastAPI
-# Importation des modèles de données de la route /ask
-from models.ask import AskRequest ,AskResponse
+
+# Importation des modèles de données 
+from models.ask import AskRequest
+from models.ask_response import AskResponse
+
 #Importation du service : ARX AI
 from services.arx_ai_service import process_prompt
 
@@ -20,7 +23,7 @@ def root():
         "message": "ARX AI Node est opérationnel"
     }
 
-#Route permettant d'envoyer une demande à ARX AI, les données sortant de cette route doivent respecter : AskResponse
+#Route POST permettant d'envoyer une demande à ARX AI, les données sortant de cette route doivent respecter : AskResponse
 @app.post("/ask", response_model=AskResponse)
 def ask(request: AskRequest):
     return process_prompt(request.prompt)

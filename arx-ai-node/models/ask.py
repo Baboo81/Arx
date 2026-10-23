@@ -13,9 +13,3 @@ class AskRequest(BaseModel):
     context: RequestContext
     
 
-#Caracteristiques de la réponse ARX AI 
-class AskResponse(BaseModel):
-    status: str
-    module: str
-    prompt: str
-    response: str
