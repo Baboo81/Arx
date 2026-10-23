@@ -26,4 +26,8 @@ def root():
 #Route POST permettant d'envoyer une demande à ARX AI, les données sortant de cette route doivent respecter : AskResponse
 @app.post("/ask", response_model=AskResponse)
 def ask(request: AskRequest):
-    return process_prompt(request.prompt)
+    return process_prompt(
+        prompt=request.prompt,
+        request_type=request.type,
+        source=request.context.source
+)
