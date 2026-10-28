@@ -4,6 +4,7 @@
 
 # Importation de notre fonction de sauvegarde
 from memory.conversation_store import save_message, load_conversations
+from memory.conversation_context import build_conversation_context
 
 
 def handle_conversation(prompt: str) -> str:
@@ -20,6 +21,12 @@ def handle_conversation(prompt: str) -> str:
     
     # Vérification temporaire de notre mémoire
     print(f"ARX AI : {len(history)} conversations récupérées.")
+    
+    # Transformation de l'historique en contexte conversationnel
+    context = build_conversation_context(history)
+    
+    # Vérification temporaire du contexte
+    print(f"ARX AI : {len(context)} messages dans le contexte.")
 
     #  Génération de la réponse
     response = f"ARX AI a reçu le message : {prompt}"
