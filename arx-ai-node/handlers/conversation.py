@@ -6,8 +6,12 @@ from memory.conversation_store import save_message
 
 def handle_conversation(prompt: str) -> str:
     """
-    Traite un message utilisateur et conserve l'échange
-    dans la mémoire d'ARX AI.
+    Traite un message envoyé à ARX AI.
+    
+    - Reçoit le message de l'utilisateur,
+    - Génère une réponse,
+    - Enregistre l'échange dans la mémoire,
+    - Retourne la réponse
     """
 
     # 1. Génération de la réponse
