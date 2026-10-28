@@ -59,4 +59,4 @@ def load_conversations(limit: int = 5) -> list[dict[str, str]]:
         conversations = json.load(file)
         
     # Retour de la liste des conversations
-    return conversations
+    return conversations[-limit:]

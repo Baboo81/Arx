@@ -1,7 +1,9 @@
-# Gestion des demandes conversationnelles d'ARX AI
+# ==========================================
+# ARX AI - Gestion des conversations
+# ==========================================
 
 # Importation de notre fonction de sauvegarde
-from memory.conversation_store import save_message
+from memory.conversation_store import save_message, load_conversations
 
 
 def handle_conversation(prompt: str) -> str:
@@ -13,12 +15,17 @@ def handle_conversation(prompt: str) -> str:
     - Enregistre l'échange dans la mémoire,
     - Retourne la réponse
     """
+    # Récupération des 5 dernières conversations
+    history = load_conversations(limit=5)
+    
+    # Vérification temporaire de notre mémoire
+    print(f"ARX AI : {len(history)} conversations récupérées.")
 
-    # 1. Génération de la réponse
+    #  Génération de la réponse
     response = f"ARX AI a reçu le message : {prompt}"
 
-    # 2. Enregistrement de la conversation
+    #  Enregistrement de la conversation
     save_message(prompt, response)
 
-    # 3. Retour de la réponse à notre service
+    #  Retour de la réponse à notre service
     return response
