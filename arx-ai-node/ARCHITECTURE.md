@@ -442,3 +442,5 @@ ARX Core
 ```
 
 Cette base préparera ensuite l'intégration progressive d'un véritable moteur d'intelligence artificielle.
+
+# LLM
