@@ -1,6 +1,6 @@
-# ==========================================
-# ARX AI - Premier modèle d'apprentissage
-# ==========================================
+# =====================================================
+# ARX AI - Premier modèle d'apprentissage (perceptron)
+# =====================================================
 
 # Données d'entraînement :
 # (nb d'échecs de connexion, classification)
