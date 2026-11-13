@@ -10,8 +10,39 @@ bias = 0.0
 # Vitesse d'apprentissage
 learning_rate = 0.01
 
+
+def normalize(attempts: float, duration: float) -> tuple[float, float]:
+    """
+    Normalise les caractéristiques pour notre exercice.
+
+    attempts : nombre d'échecs
+    duration : durée en secondes
+    """
+
+    # Échelles de référence fictives
+    normalized_attempts = attempts / 50
+    normalized_duration = duration / 3600
+
+    return normalized_attempts, normalized_duration
+
+def predict_activity(attempts: float, duration: float) -> int:
+    """
+    Prédit une activité à partir de données brutes.
+    Prépare les observations brutes, notamment en les normalisant.
+
+    1. Normalise les deux caractéristiques.
+    2. Transmet les valeurs au perceptron.
+    3. Retourne la classe prédite.
+    """
+
+    x1, x2 = normalize(attempts, duration)
+
+    return predict(x1, x2)
+
 def predict(x1: float, x2: float) -> int:
     """
+    Effectue uniquement le calcul mathématique du perceptron.
+    
     x1 : nombre d'échecs de connexion
     x2 : durée des échecs en secondes
     
@@ -50,3 +81,29 @@ def train(x1: float, x2: float, expected: int) -> int:
     bias += learning_rate * error
     
     return error
+
+# ==========================================
+# PREMIER TEST D'APPRENTISSAGE
+# ==========================================
+
+# Observation fictives :
+# 20 échecs en 5 secondes, classe suspecte (1)
+x1 = 20
+x2 = 5
+expected = 1
+
+# Prédiction avant aprrentissage
+print("Avant entraînement :", predict(x1, x2))
+
+# Entraînement sur une eobservation
+error = train(x1, x2, expected)
+
+# Affichage des paramètres appris
+print("Erreur :", error)
+print(f"Poids 1 : {weight1:.4f}")
+print(f"Poids 2 : {weight2:.4f}")
+print(f"Biais : {bias:.4f}")
+
+# Nouvelle prédiction
+print("Après entraînement :", predict(x1, x2))
+print("Données normalisées :", normalize(20, 1800))

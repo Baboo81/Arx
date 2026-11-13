@@ -1,149 +1,293 @@
-ARX AI --- Le perceptron
-Fiche de cours --- 12 novembre 2026
-Projet : arx-ai-node/learning/first_model.py
+ARX AI — Le perceptron
+Carnet d'apprentissage — leçons 1 à 3
+Séances : 12 et 13 novembre 2026
+Projet : arx-ai-node/learning/
+Fichiers : first_model.py, multi_input_model.py
+Objectif pédagogique : comprendre et programmer nous-mêmes un classificateur binaire supervisé, puis le faire évoluer vers plusieurs caractéristiques. Toutes les observations et étiquettes de sécurité de cette fiche sont fictives.
+
 1. Qu'est-ce qu'un perceptron ?
-Un perceptron est un neurone artificiel simple utilisé pour classer
-des données en deux catégories. Dans notre exercice de cybersécurité
-fictif, 0 signifie « normale » et 1 « suspecte ».
+Un perceptron est un neurone artificiel simple capable d'apprendre une frontière de décision linéaire. Dans nos exercices, il attribue une des deux classes : 0 (activité considérée comme normale) ou 1 (activité considérée comme suspecte). Ces classes sont des étiquettes pédagogiques, pas un diagnostic de cyberattaque.
 
-Notre entrée x est le nombre de tentatives de connexion échouées par
-minute. Ce seul indicateur ne permet pas de diagnostiquer une
-véritable attaque.
-2. Les exemples d'entraînement
-Tentatives (`x`)   Classe attendue
+Notre premier modèle ne reçoit qu'une seule caractéristique x : le nombre de tentatives de connexion échouées sur une fenêtre d'observation. La durée exacte de cette fenêtre doit être définie pour un usage réel.
+Apprentissage supervisé
+Nous donnons au modèle des observations et leurs réponses attendues. Il ajuste ses paramètres lorsqu'il se trompe.
+2. Leçon 1 — Perceptron à une entrée (12 novembre)
+2.1 Jeu d'entraînement initial
+Échecs (x)	Classe attendue
+2	0
+5	0
+8	0
+20	1
+35	1
+50	1
 
-               2                 0
-               5                 0
-               8                 0
-              20                 1
-              35                 1
-              50                 1
-C'est de l'apprentissage supervisé : nous fournissons à l'algorithme
-des exemples et leurs bonnes réponses.
-3. Le calcul du neurone
-Formule : z = weight × x + bias
-- x : donnée d'entrée.
-- weight (poids) : influence de l'entrée.
-- bias (biais) : décalage de la frontière de décision.
-- z : score obtenu, pas une probabilité.
-Règle de classification : 1 si z > 0, sinon 0.
-4. Comment apprend-il ?
-Nous commençons avec weight = 0, bias = 0 et learning_rate = 0.01.
 
-Pour chaque exemple : 1. Le neurone fait une prédiction. 2. Il calcule
-error = expected - prediction. 3. Il corrige ses paramètres :
+Note historique : ce tableau correspond à notre première séance. Le 13 novembre, le fichier first_model.py présenté utilisait un autre jeu d'entraînement : (4,0), (6,0), (10,0), (20,1), (35,1), (50,1). Les résultats des deux séances ne doivent pas être confondus.
+2.2 Calcul et fonction d'activation
+z = weight × x + bias
+- x : valeur d'entrée ;
+- weight : poids appris ;
+- bias : biais appris ;
+- z : score mathématique, pas une probabilité.
+La fonction d'activation renvoie 1 si z > 0, sinon 0.
+2.3 Règle d'apprentissage
+Initialisation : weight = 0.0, bias = 0.0, learning_rate = 0.01.
+
+Pour chaque observation :
+1. Calculer prediction ;
+2. Calculer error = expected - prediction ;
+3. Mettre à jour les paramètres :
 weight += learning_rate * error * x
 bias += learning_rate * error
-Si la réponse attendue est 1 et la prédiction 0, l'erreur vaut
-+1. Si l'inverse se produit, elle vaut −1. Une bonne prédiction
-produit une erreur nulle.
+Une erreur de +1 signifie que le modèle a prédit 0 au lieu de 1 ; une erreur de -1 signifie l'inverse ; une erreur nulle ne provoque aucune correction.
 
-Une époque (epoch) correspond à un passage sur tous les exemples.
-Le nombre d'erreurs affiché pendant une époque compte les erreurs
-rencontrées au fil des corrections.
-5. Notre programme Python commenté
-Fichier : learning/first_model.py
-# ARX AI - Premier perceptron
-
-# (nombre de tentatives échouées, classe attendue)
+Une époque (epoch) est un passage complet sur les exemples. Les erreurs comptées pendant une époque sont celles rencontrées au fil des corrections successives ; leur nombre peut temporairement augmenter.
+2.4 Code de référence de la première séance
+# ARX AI — Premier perceptron (version pédagogique du 12 novembre)
 training_data = [
     (2, 0), (5, 0), (8, 0),
     (20, 1), (35, 1), (50, 1),
 ]
 
-# Paramètres à apprendre
 weight = 0.0
 bias = 0.0
 learning_rate = 0.01
 
 
 def predict(x: float) -> int:
-    # Somme pondérée
     result = weight * x + bias
-
-    # Fonction d'activation à seuil
     return 1 if result > 0 else 0
 
 
-# L'entraînement répète les exemples 100 fois
 for epoch in range(100):
     errors = 0
-
     for x, expected in training_data:
         prediction = predict(x)
         error = expected - prediction
-
-        # Le neurone ajuste ses paramètres
         weight += learning_rate * error * x
         bias += learning_rate * error
-
         if error != 0:
             errors += 1
 
     if epoch % 10 == 0:
         print(f"Époque {epoch} : {errors} erreurs")
 
-
-print("\\nEntraînement terminé !")
+print("\nEntraînement terminé !")
 print(f"Poids appris : {weight:.4f}")
 print(f"Biais appris : {bias:.4f}")
 
-# Prédictions après apprentissage
 for attempts in [3, 12, 25, 60]:
-    result = predict(attempts)
-    print(f"{attempts} échecs -> Classe {result}")
-Depuis le dossier arx-ai-node, avec .venv activé :
+    print(f"{attempts} échecs -> Classe {predict(attempts)}")
+Exécution depuis arx-ai-node, environnement .venv activé :
 python -m py_compile learning/first_model.py
 python learning/first_model.py
-6. Résultats de notre séance
-               Époque   Erreurs affichées
+2.5 Résultats observés le 12 novembre
+Époque	Erreurs affichées
+0	1
+10	3
+20	0
+30 à 90 (tous les 10)	0
 
-                    0                   1
-                   10                   3
-                   20                   0
-30 à 90 (tous les 10)                   0
-Paramètres finaux observés : - Poids : 0.0200 - Biais :
--0.2900
 
-Prédictions obtenues : 3 → 0, 12 → 0, 25 → 1, 60 → 1.
+Poids final observé : 0.0200 ; biais final : -0.2900. Prédictions : 3 → 0, 12 → 0, 25 → 1, 60 → 1.
 
-Le nombre d'erreurs peut augmenter temporairement pendant
-l'apprentissage : les corrections successives ne garantissent pas une
-amélioration à chaque époque.
-7. La frontière de décision
-Notre modèle entraîné calcule :
+Frontière de décision :
+z = 0.02 × x − 0.29
+z > 0 ⇔ x > 14.5
+Tentatives	Score	Classe
+14	−0.01	0
+14.5	0	0
+15	+0.01	1
+25	+0.21	1
 
-z = 0,02 × x − 0,29
 
-La classe 1 est prédite si :
+Pour x = 14, le score vaut 0.02 × 14 − 0.29 = −0.01 : la classe est 0.
+3. Leçon 2 — Séparer entraînement et test (13 novembre)
+Un modèle peut réussir sur les données qu'il a vues pendant son entraînement et se tromper sur des observations inédites. C'est pourquoi nous séparons :
+- training_data : exemples utilisés pour ajuster poids et biais ;
+- test_data : exemples jamais utilisés pour les ajustements, servant à évaluer le modèle après l'entraînement.
+Dans le fichier first_model.py partagé le 13 novembre, les observations étaient :
+training_data = [
+    (4, 0), (6, 0), (10, 0),
+    (20, 1), (35, 1), (50, 1),
+]
 
-0,02 × x − 0,29 > 0, donc x > 14,5.
-Tentatives   Score   Classe
+test_data = [
+    (12, 0),
+    (30, 1),
+]
+3.1 Évaluer sans réentraîner
+correct_predictions = 0
 
-        14   −0,01        0
-      14,5       0        0
-        15   +0,01        1
-        25   +0,21        1
-Exercice résolu : pour x = 14, z = 0,02 × 14 − 0,29 = −0,01.
-Comme le score n'est pas strictement positif, le neurone répond classe
-0.
-8. Les limites à retenir
-Le perceptron a appris une séparation qui fonctionne sur nos six
-exemples fictifs, pas une règle universelle de cybersécurité. Il ne
-considère ni l'adresse IP, ni l'heure, ni le service ciblé, ni les
-habitudes du réseau.
+for attempts, expected in test_data:
+    prediction = predict(attempts)
+    if prediction == expected:
+        correct_predictions += 1
+    print(f"{attempts} échecs -> Prédiction : {prediction}, Attendu : {expected}")
 
-Un modèle peut réussir sur ses exemples d'entraînement et se tromper sur
-des données inédites. Il ne faut donc pas lui confier des blocages
-automatiques de réseau à ce stade.
-9. Prochaine leçon
-Nous allons : 1. Séparer les données d'entraînement des données de
-test. 2. Mesurer les bonnes et mauvaises prédictions. 3. Comprendre
-les faux positifs, les faux négatifs et le surapprentissage.
-4. Puis entraîner un modèle qui analyse plusieurs caractéristiques.
+accuracy = correct_predictions / len(test_data) * 100
+print(f"\nAccuracy du modèle : {accuracy:.2f}%")
+L'accuracy est la proportion de classifications correctes :
+accuracy = (nombre de prédictions correctes / nombre de tests) × 100
+Ce n'est pas la même chose que la métrique precision (précision des alertes positives), que nous étudierons plus tard.
+3.2 Résultats réellement observés le 13 novembre
+Époque	Erreurs affichées
+0	1
+10	4
+20	4
+30	4
+40	4
+50	2
+60, 70, 80, 90	0
 
-À retenir : le perceptron apprend en modifiant son poids et son
-biais à partir des erreurs. Il applique ensuite une frontière
-mathématique aux nouvelles données.
 
-ARX AI --- Carnet d'apprentissage, leçon 1.
+Paramètres finaux : weight = 0.0800, bias = -0.9800.
+Échecs	Prédiction	Attendu
+12	0	0
+30	1	1
+
+
+Accuracy observée : 100 % (2/2). C'est encourageant pour le fonctionnement du code, mais deux exemples ne permettent pas d'estimer la fiabilité réelle. La nouvelle frontière est x > 12.25 : elle est différente de celle du 12 novembre, car les données d'entraînement ont changé.
+3.3 Notions à approfondir
+- Généralisation : performance sur de nouvelles observations ;
+- Surapprentissage (overfitting) : un modèle s'adapte trop aux données d'entraînement et généralise mal ;
+- Faux positif : une activité normale classée suspecte ;
+- Faux négatif : une activité suspecte classée normale.
+Ces notions sont introduites, mais nous n'avons pas encore calculé de matrice de confusion ni de taux de faux positifs/faux négatifs sur un jeu de test représentatif.
+4. Leçon 3 — Perceptron à deux entrées (13 novembre)
+Fichier : learning/multi_input_model.py
+
+Nous souhaitons distinguer deux situations : de nombreux échecs répartis sur une longue durée et des échecs très rapprochés dans le temps.
+- x1 : nombre d'échecs de connexion ;
+- x2 : durée d'observation en secondes.
+Notre nouveau neurone utilise deux poids, mais reste un seul neurone :
+z = weight1 × x1 + weight2 × x2 + bias
+Chaque poids est corrigé à partir de la même erreur, mais de sa propre entrée :
+weight1 += learning_rate * error * x1
+weight2 += learning_rate * error * x2
+bias += learning_rate * error
+4.1 Fonctions développées
+Le code suivant représente l'état de travail communiqué le 13 novembre, avec indentation et commentaires clarifiés :
+# ARX AI — Perceptron à deux entrées
+weight1 = 0.0
+weight2 = 0.0
+bias = 0.0
+learning_rate = 0.01
+
+
+def normalize(attempts: float, duration: float) -> tuple[float, float]:
+    """Prépare les caractéristiques selon nos échelles fictives."""
+    normalized_attempts = attempts / 50
+    normalized_duration = duration / 3600
+    return normalized_attempts, normalized_duration
+
+
+def predict_activity(attempts: float, duration: float) -> int:
+    """Normalise des observations brutes avant la prédiction."""
+    x1, x2 = normalize(attempts, duration)
+    return predict(x1, x2)
+
+
+def predict(x1: float, x2: float) -> int:
+    """Applique le calcul mathématique du perceptron."""
+    z = weight1 * x1 + weight2 * x2 + bias
+    return 1 if z > 0 else 0
+
+
+def train(x1: float, x2: float, expected: int) -> int:
+    """Apprend à partir d'une observation et renvoie l'erreur."""
+    global weight1, weight2, bias
+    prediction = predict(x1, x2)
+    error = expected - prediction
+    weight1 += learning_rate * error * x1
+    weight2 += learning_rate * error * x2
+    bias += learning_rate * error
+    return error
+
+
+# Premier test, encore effectué sur des valeurs BRUTES :
+x1 = 20
+x2 = 5
+expected = 1
+print("Avant entraînement :", predict(x1, x2))
+error = train(x1, x2, expected)
+print("Erreur :", error)
+print(f"Poids 1 : {weight1:.4f}")
+print(f"Poids 2 : {weight2:.4f}")
+print(f"Biais : {bias:.4f}")
+print("Après entraînement :", predict(x1, x2))
+print("Données normalisées :", normalize(20, 1800))
+4.2 Premier test exécuté
+Avant entraînement : 0
+Erreur : 1
+Poids 1 : 0.2000
+Poids 2 : 0.0500
+Biais : 0.0100
+Après entraînement : 1
+Données normalisées : (0.4, 0.5)
+Le modèle a corrigé une seule observation (20, 5, 1) : ce succès ne prouve aucune généralisation. Dans ce test, les valeurs ont été données sans normalisation à train() ; il ne faut donc pas réutiliser ces poids pour évaluer directement des données normalisées.
+4.3 Pourquoi normaliser ?
+Les deux entrées n'ont pas la même unité ni la même échelle. Pour notre exercice :
+normalized_attempts = attempts / 50
+normalized_duration = duration / 3600
+Par exemple : normalize(20, 1800) → (0.4, 0.5).
+
+Ces diviseurs sont des références pédagogiques choisies manuellement. Ils ne garantissent pas des valeurs comprises entre 0 et 1 et devront être justifiés ou remplacés pour de vraies données. Les transformations appliquées pendant l'entraînement doivent être identiques à celles utilisées lors de la prédiction.
+4.4 Séparation des responsabilités
+Observation brute
+    ↓
+Validation (à développer)
+    ↓
+Normalisation : normalize()
+    ↓
+Calcul : predict()
+    ↓
+Classe 0 ou 1
+predict_activity() sert de point d'entrée pour les données brutes. predict() ne fait que le calcul du neurone. Il faudra également valider les observations (par exemple refuser une durée négative).
+4.5 Limite importante de notre exemple
+Avec un seul exemple positif, les deux poids sont devenus positifs. Augmenter la durée augmente donc aussi le score z, ce qui n'exprime pas forcément la relation recherchée entre rapidité des échecs et suspicion. Il faut plusieurs exemples variés et un protocole de test pour apprendre une règle utile. Un perceptron simple ne peut représenter que des séparations linéaires.
+5. Architecture future — ARX AI Lab
+Vision validée le 13 novembre 2026, non implémentée : ARX AI pourra à terme proposer de nouveaux algorithmes, les entraîner et les comparer dans un laboratoire isolé. Aucun nouveau code généré ne sera déployé sur le réseau réel sans validation humaine explicite.
+
+Chaîne envisagée :
+ARX SOC / ARX Server : événements et journaux
+    ↓
+Validation, extraction de caractéristiques
+    ↓
+Détecteurs et modèles ARX AI
+    ↓
+Analyse des limites / proposition de nouveau modèle
+    ↓
+ARX AI Lab : expérimentation isolée et tests
+    ↓
+Rapport de performances, risques et traçabilité
+    ↓
+Autorisation humaine avant déploiement
+Principes : moindre privilège, isolation du code expérimental, comparaison aux modèles existants, mesures des faux positifs/faux négatifs, historique des versions et possibilité de retour arrière.
+6. Point de reprise — Prochaine séance
+État confirmé : le fichier multi_input_model.py contient les fonctions normalize(), predict_activity(), predict() et train(), ainsi que le test historique sur une seule observation brute. Le jeu d'entraînement à plusieurs observations n'a pas encore été ajouté.
+
+Étapes suivantes, dans cet ordre :
+1. Ajouter un petit training_data fictif avec trois valeurs par ligne : (échecs, durée, classe) ;
+2. Isoler ou retirer le test historique sur les valeurs brutes ;
+3. Réinitialiser weight1, weight2 et bias avant l'entraînement ;
+4. Normaliser avant chaque appel à train() ;
+5. Effectuer plusieurs époques et observer l'évolution des erreurs ;
+6. Préparer un test_data distinct, normalisé avec la même fonction ;
+7. Évaluer l'accuracy et étudier les faux positifs/faux négatifs ;
+8. Discuter des limites : données trop peu nombreuses, déséquilibre des classes, choix des caractéristiques et généralisation.
+Jeu d'entraînement proposé, mais pas encore implémenté :
+training_data = [
+    (3, 1800, 0),
+    (5, 1200, 0),
+    (8, 2400, 0),
+    (12, 3600, 0),
+    (15, 10, 1),
+    (20, 5, 1),
+    (25, 15, 1),
+    (30, 8, 1),
+]
+Ce jeu est volontairement simple et artificiel : il permettra d'expliquer les mécanismes, mais pas de valider un détecteur réel.
+
+À retenir : un perceptron apprend à partir d'erreurs, pas d'une compréhension humaine du réseau. La qualité des données, leur préparation, leur diversité et une évaluation indépendante sont aussi importantes que la formule mathématique.
+ARX AI — Carnet d'apprentissage, leçons 1 à 3 — mise à jour du 13 novembre 2026.
