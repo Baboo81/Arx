@@ -5,12 +5,18 @@
 # Données d'entraînement :
 # (nb d'échecs de connexion, classification)
 training_data = [
-    (2, 0),
-    (5, 0),
-    (8, 0),
+    (4, 0),
+    (6, 0),
+    (10, 0),
     (20, 1),
     (35, 1),
     (50, 1),
+]
+
+# Données de test
+test_data = [
+    (12, 0),
+    (30, 1)
 ]
 
 # Neurone artificiel : z = w * x + b (x = nombre d'échecs de connexion, w = poids, b = biais)
@@ -63,9 +69,33 @@ for epoch in range(100):
 print("\nEntrainement terminé !")
 print(f"Poids appris : {weight:.4f}, Biais appris : {bias:.4f}")
 
-# Test sur de nouvelles valeurs
-for attempts in [3, 12, 25, 60]:
-    result = predict(attempts)
-    print(f"{attempts} échecs -> Classe {result}")
+# ==========================================
+# ÉVALUATION DU MODÈLE
+# ==========================================
+
+# Compteur des prédictions correctes
+correct_predictions = 0
+
+# Parcours des données de test
+for attempts, expected in test_data:
+    
+    # Le perceptron effectues une prédiction
+    prediction = predict(attempts)
+    
+    # Comparaison avec la bonne réponse
+    if prediction == expected:
+        correct_predictions += 1
+        
+    # Affichage du résulat
+    print(
+        f"{attempts} échecs -> "
+        f"Prédiction : {prediction}, "
+        f"Attendu : {expected}"
+    )
+    
+# Calcul du taux de réussite : Accuracy (Taux de bonnes classifications) = (Nombre de prédictions correctes / Nombre total de tests) * 100
+accuracy = correct_predictions / len(test_data) * 100
+
+print(f"\nPrécision du modèle : {accuracy:.2f}%")
     
         
